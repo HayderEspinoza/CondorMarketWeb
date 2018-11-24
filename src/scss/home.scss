@@ -1,0 +1,56 @@
+.content {
+    padding-top: 30px;
+    .filter {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        border-radius: 5px;
+    }
+    .product-wrap {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        .wrap-price-quantity{
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            .wrap-quantity {
+                border: 1px solid $red;
+                padding: 3px 8px 6px 8px;
+                border-radius: 25px;
+            }
+            .minus-btn, .plus-btn {
+                background: #FFF;
+                border: 1px solid $red;
+                border-radius: 50%;
+                padding: 0px 7px 4px 7px;
+                &:hover {
+                    background: $red;
+                    cursor: pointer;
+                    > * {
+                        color: white;
+                    }
+                }
+            }
+            .quantity-label {
+                padding: 0 10px;
+                font-weight: bold;
+            }
+        }
+        .price {
+            font-size: 13px;
+            font-weight: bold;
+        }
+    }
+}
+.underline {
+    position: relative;
+    &:before {
+        content: '';
+        position: absolute;
+        width: 30%;
+        height: 2px;
+        background: $red;
+        bottom: -5px;
+    }
+}

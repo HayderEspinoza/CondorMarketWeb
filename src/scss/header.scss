@@ -1,0 +1,19 @@
+.header{
+    padding: 18px 0;
+    .brand > *{
+        color: $red;
+        font-weight: 700;
+    }
+    .quantity-products{
+        background: $red;
+        border-radius: 50%;
+        display: inline;
+        padding: 3px 8px;
+        color: #FFF;
+        font-size: 12px;
+        font-weight: 700;
+        position: absolute;
+        right: 5px;
+        top: -10px;
+    }
+}
