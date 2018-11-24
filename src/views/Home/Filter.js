@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
+import Checkbox from '../../components/Checkbox';
 
 class Filter extends PureComponent {
     render() {
@@ -9,10 +10,12 @@ class Filter extends PureComponent {
                 <Col>
                     <Row className="filter">
                         <Col>
-                            <h4>Filters</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum harum iusto magni praesentium sint dolorum dolor placeat ad eligendi explicabo, quam accusamus consectetur in. Itaque deleniti aut eius a laudantium?
-                            </p>
+                            <h5>Categories</h5>
+                            <div className={'filter-content'}>
+                                <Checkbox name={'Bebidas'} />
+                                <Checkbox name={'Bebidas'} />
+                                <Checkbox name={'Bebidas'} />
+                            </div>
                         </Col>
                     </Row>
                 </Col>

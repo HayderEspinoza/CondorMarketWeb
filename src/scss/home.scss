@@ -5,6 +5,13 @@
         padding-bottom: 20px;
         border: 1px solid rgba(0, 0, 0, 0.12);
         border-radius: 5px;
+        &-name{
+            color: $red;
+            padding-top: 20px;
+        }
+        &-content{
+            padding-top: 10px;
+        }
     }
     .product-wrap {
         padding-top: 10px;
