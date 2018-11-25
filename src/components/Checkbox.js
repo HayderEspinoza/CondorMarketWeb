@@ -3,7 +3,7 @@ import React from 'react';
 const Checkbox = ({value, name, checked, onChange}) => {
     return (
         <div className="cntr">
-            <label for="cbx" className="label-cbx">
+            <label className="label-cbx">
                 <input
                     type="checkbox"
                     className="invisible"

@@ -9,17 +9,15 @@ class Home extends PureComponent {
     render() {
         return (
             <React.Fragment>
-                <Container>
-                    <Header/>
-                    <Row className={'content'}>
-                        <Col md={3}>
-                            <Filter />
-                        </Col>
-                        <Col md={9}>
-                            <ListProducts />
-                        </Col>
-                    </Row>
-                </Container>
+                <Header />
+                <Row className={'content'}>
+                    <Col md={3}>
+                        <Filter />
+                    </Col>
+                    <Col md={9}>
+                        <ListProducts />
+                    </Col>
+                </Row>
             </React.Fragment>
         );
     }
