@@ -20,7 +20,9 @@ class Header extends PureComponent {
                         <div className={'quantity-products'}>5</div>
                         <IoMdCart size={30} color={'#000'}/>
                     </Link>
-                    <TiUser size={30} color={'#000'} />
+                    <Link to={'/my-orders'}>
+                        <TiUser size={30} color={'#000'} />
+                    </Link>
                 </Col>
             </Row>
         );
