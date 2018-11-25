@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button, Row } from 'reactstrap';
 import { TiMinus, TiPlus } from "react-icons/ti";
 import { Link } from 'react-router-dom';
-import ControlQuantity from './ControlQuantity';
+import QuantityControl from './QuantityControl';
 
 const Product = () => {
     return (
@@ -15,7 +15,7 @@ const Product = () => {
                     <CardSubtitle>Pony Malta Leona 340 Mlt</CardSubtitle>
                     <div className={'wrap-price-quantity'}>
                         <span className={'price'}>$ 45.000</span>
-                        <ControlQuantity />
+                        <QuantityControl />
                     </div>
                     <Button color={'danger'} size={'sm'} block>Add</Button>
                 </CardBody>

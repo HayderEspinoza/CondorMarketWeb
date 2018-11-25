@@ -1,10 +1,14 @@
 .header{
+    .icon-shoppin-cart {
+        position: relative;
+        padding: 0 20px;
+    }
     padding: 18px 0;
     .brand > *{
         color: $red;
         font-weight: 700;
     }
-    .quantity-products{
+    .quantity-products {
         background: $red;
         border-radius: 50%;
         display: inline;
@@ -13,7 +17,7 @@
         font-size: 12px;
         font-weight: 700;
         position: absolute;
-        right: 5px;
-        top: -10px;
+        right: 8px;
+        top: -15px;
     }
 }

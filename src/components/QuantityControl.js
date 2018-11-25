@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { TiMinus } from 'react-icons/ti';
 import { TiPlus } from 'react-icons/ti';
 
-const ControlQuantity = props => {
+const QuantityControl = props => {
     return (
-        <span className={'wrap-quantity'}>
+        <div className={'wrap-quantity'}>
             <span className={'minus-btn'} onClick={() => alert('Prueba')}>
                 <TiMinus size={10} />
             </span>
@@ -13,12 +13,12 @@ const ControlQuantity = props => {
             <span className={'plus-btn'}>
                 <TiPlus size={10} />
             </span>
-        </span>
+        </div>
     );
 };
 
-ControlQuantity.propTypes = {
+QuantityControl.propTypes = {
     
 };
 
-export default ControlQuantity;
+export default QuantityControl;

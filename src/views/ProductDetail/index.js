@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import { Row, Col, Button } from 'reactstrap';
-import ControlQuantity from './../../components/ControlQuantity';
 import { TiMinus } from 'react-icons/ti';
 import { TiPlus } from 'react-icons/ti';
+import QuantityControl from './../../components/QuantityControl';
 
 class ProductDetail extends PureComponent {
     render() {
@@ -19,7 +19,7 @@ class ProductDetail extends PureComponent {
                         <h2>CLUB COL TW 330CC X 24 N - 3753</h2>
                         <div className={'wrap-price-quantity'}>
                             <h4>$ 45.000</h4>
-                            <ControlQuantity />
+                            <QuantityControl />
                             <Button color={'danger'} size={'sm'}>
                                 Add <TiPlus />
                             </Button>

@@ -1,3 +1,4 @@
+//Products list
 .content {
     padding-top: 30px;
     .filter {
@@ -22,6 +23,26 @@
         }
     }
 }
+.wrap-products-list{
+    padding: 30px 0;
+}
+
+//Order summary
+.order-summary{
+    margin-bottom: 20px;
+    td {
+        font-weight: bold;
+    }
+}
+.order-product-list td{
+    padding: 15px 5px;
+    a {
+        font-weight: bold;
+        color: #000;
+    }
+}
+
+//helpers
 .underline {
     position: relative;
     &:before {
@@ -32,7 +53,4 @@
         background: $red;
         bottom: -5px;
     }
-}
-.wrap-products-list{
-    padding: 30px 0;
 }
