@@ -37,3 +37,18 @@ export const setShoppingCart = (data) => ({
 export const getShoppingCart = {
     type: actionTypes.GET_SHOPPING_CART
 }
+
+export const getProduct = (id) => ({
+    type: actionTypes.GET_PRODUCT,
+    id
+})
+
+export const setProduct = (product) => ({
+    type: actionTypes.SET_PRODUCT,
+    product
+})
+
+export const removeProduct = (data) => ({
+    type: actionTypes.REMOVE_PRODUCT,
+    data
+})

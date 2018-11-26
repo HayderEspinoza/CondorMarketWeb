@@ -2,9 +2,18 @@ import React, { PureComponent } from 'react';
 import Header from './../../components/Header';
 import { Row, Col, FormGroup, Label, Input, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { getShoppingCart } from '../../actions/products';
+import { connect } from 'react-redux';
 
 class MyOrders extends PureComponent {
+
+    componentDidMount() {
+        this.props.getShoppingCart()
+    }
+    
+
     render() {
+        const { shopping_cart } = this.props
         return (
             <React.Fragment>
                 <Header />
@@ -36,15 +45,21 @@ class MyOrders extends PureComponent {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>
-                                        <Link to={'products/1'}>Mark</Link>
-                                    </td>
-                                    <td>4</td>
-                                    <td>$10.000</td>
-                                    <td>$43.000</td>
-                                </tr>
+                                {
+                                    shopping_cart.map((product, index) => {
+                                        return (
+                                            <tr>
+                                                <th scope="row">{index}</th>
+                                                <td>
+                                                    <Link to={'products/1'}>{product.name}</Link>
+                                                </td>
+                                                <td>4</td>
+                                                <td>$10.000</td>
+                                                <td>$43.000</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
                             </tbody>
                         </Table>
                     </Col>
@@ -54,4 +69,16 @@ class MyOrders extends PureComponent {
     }
 }
 
-export default MyOrders;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        shopping_cart: state.ProductReducer.shopping_cart
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        getShoppingCart: () => dispatch(getShoppingCart),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyOrders)

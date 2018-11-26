@@ -17,6 +17,8 @@ export const ProductReducer = (state = initialState, action) => {
             return { ...state, filter: {...state.filter, ...action.filter} }
         case actionTypes.SET_SHOPPING_CART:
             return { ...state, shopping_cart: action.data }
+        case actionTypes.SET_PRODUCT:
+            return { ...state, product: action.product }
         default:
             return state;
     }

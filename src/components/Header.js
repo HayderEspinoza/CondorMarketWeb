@@ -15,7 +15,7 @@ class Header extends PureComponent {
     
 
     render() {
-        const { searchProduct, shopping_cart, user } = this.props
+        const { searchProduct, shopping_cart, user, filter } = this.props
         return (
             <Row className={'header'}>
                 <Col className={'brand'}>
@@ -23,12 +23,15 @@ class Header extends PureComponent {
                         <h3>Condor Market</h3>
                     </Link>
                 </Col>
-                <Col md={6} className={'d-none d-md-block'}>
-                    <div className={'product-search'}>
-                        <FaSearch color={'#b7b7b7'}/>
-                        <input type="text" placeholder={'Search'} onChange={searchProduct}/>
-                    </div>
-                </Col>
+                {
+                    filter &&
+                    <Col md={6} className={'d-none d-md-block'}>
+                        <div className={'product-search'}>
+                            <FaSearch color={'#b7b7b7'}/>
+                            <input type="text" placeholder={'Search'} onChange={searchProduct}/>
+                        </div>
+                    </Col>
+                }
                 <Col className={'text-right'}>
                     <Link to={'/shopping-cart'} className={'icon-shoppin-cart'}>
                         <div className={'quantity-products'}>{shopping_cart.length}</div>

@@ -4,31 +4,15 @@ import { Col, Row, Button } from 'reactstrap';
 import ControlQuantity from '../../components/QuantityControl';
 import { MdCancel } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getShoppingCart, addProduct, removeProduct } from '../../actions/products';
+import RowOrder from './RowOrder';
+import { moneyFormat } from '../../config/helpers';
 
 class ShoppingCart extends PureComponent {
 
-
-    _renderProduct = () => {
-        return (
-            <tr>
-                <td>
-                    <Link to={'products/1'}>
-                        Club Col Tw 330cc X 24 N - 3753
-                    </Link>
-                </td>
-                <td>
-                    <ControlQuantity />
-                </td>
-                <td>$54.565</td>
-                <td>$345.234</td>
-                <td className={'text-center'}>
-                    <MdCancel color={'#999'} size={20} />
-                </td>
-            </tr>
-        )
-    }
-
     render() {
+        const { shopping_cart, addProduct, removeProduct, total } = this.props
         return (
             <React.Fragment>
                 <Header/>
@@ -46,7 +30,16 @@ class ShoppingCart extends PureComponent {
                                 </tr>
                             </thead>
                             <tbody>
-                                { this._renderProduct() }
+                                {
+                                    shopping_cart.map((product, index) => {
+                                        return  <RowOrder 
+                                                    {...product} 
+                                                    key={index} 
+                                                    addProduct={addProduct} 
+                                                    removeProduct={removeProduct}
+                                                />
+                                    })
+                                }
                             </tbody>
                         </table>
                     </Col>
@@ -56,7 +49,7 @@ class ShoppingCart extends PureComponent {
                             <thead>
                                 <tr>
                                     <td>Total</td>
-                                    <td className={'text-right'}>$456.342</td>
+                                    <td className={'text-right'}>{ moneyFormat(total, 0, '$') }</td>
                                 </tr>
                             </thead>
                         </table>
@@ -68,4 +61,25 @@ class ShoppingCart extends PureComponent {
     }
 }
 
-export default ShoppingCart;
+const mapStateToProps = (state, ownProps) => {
+    let total = 0
+    let shopping_cart = state.ProductReducer.shopping_cart
+    if (shopping_cart)
+        shopping_cart.forEach(product => {
+            total += product.quantity * product.data.price
+        });
+    return {
+        shopping_cart: state.ProductReducer.shopping_cart,
+        total: total
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        getShoppingCart: () => dispatch(getShoppingCart),
+        addProduct: (product) => dispatch(addProduct(product)),
+        removeProduct: (product) => dispatch(removeProduct(product)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart)

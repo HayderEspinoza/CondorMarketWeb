@@ -1,7 +1,7 @@
 import { takeLatest, call, put, select } from "redux-saga/effects";
 import { actionTypes } from '../../config/actionTypes';
 import ProductProvider from './../providers/ProductProvider';
-import { setProducts, getProducts, setFilter, setShoppingCart } from "../../actions/products";
+import { setProducts, getProducts, setFilter, setShoppingCart, setProduct } from "../../actions/products";
 
 function* getProductsGenerator(action) {
     try {
@@ -20,9 +20,10 @@ function* addProductGenerator(action) {
         if (shopping_cart) {
             let counter = 0
             shopping_cart = JSON.parse(shopping_cart).map(item => {
-                if (item.product === data.product){
+                if (item.product === data.product) {
                     counter++
-                    return { ...item, quantity: item.quantity + data.quantity }
+                    console.log(data.data);
+                    return { ...item, quantity: item.quantity + data.quantity, data: data.data }
                 }
                 return item
             })
@@ -32,6 +33,20 @@ function* addProductGenerator(action) {
         } else {
             yield put(setShoppingCart([data]))
             window.localStorage.setItem('shopping_cart', JSON.stringify([data]))
+        }
+    } catch (error) {
+        console.log('error', error);
+    }
+}
+
+function* removeProductGenerator(action) {
+    try {
+        const { data } = action
+        let shopping_cart = yield window.localStorage.getItem('shopping_cart')
+        if (shopping_cart) {
+            shopping_cart = JSON.parse(shopping_cart).filter(item => item.product !== data._id)
+            yield put(setShoppingCart(shopping_cart))
+            localStorage.setItem('shopping_cart', JSON.stringify(shopping_cart))
         }
     } catch (error) {
         console.log('error', error);
@@ -56,9 +71,20 @@ function* getShoppingCartGenerator(action) {
     }
 }
 
+function* getProductGenerator(action) {
+    try {
+        const product = yield call(ProductProvider.getProduct, action.id)
+        yield put(setProduct(product))
+    } catch (error) {
+        console.log('error', error);
+    }
+}
+
 export function* productSaga() {
     yield takeLatest(actionTypes.GET_PRODUCTS, getProductsGenerator)
     yield takeLatest(actionTypes.ADD_PRODUCT, addProductGenerator)
     yield takeLatest(actionTypes.SEARCH_PRODUCT, searchProductGenerator)
     yield takeLatest(actionTypes.GET_SHOPPING_CART, getShoppingCartGenerator)
+    yield takeLatest(actionTypes.GET_PRODUCT, getProductGenerator)
+    yield takeLatest(actionTypes.REMOVE_PRODUCT, removeProductGenerator)
 }

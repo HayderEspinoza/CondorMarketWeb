@@ -26,7 +26,7 @@ class Product extends PureComponent {
 
     _addProduct = (product) => {
         const { quantity } = this.state
-        this.props.addProduct({ product, quantity })
+        this.props.addProduct({ product: product._id, quantity, data: product })
     }
 
     render(){
@@ -35,7 +35,7 @@ class Product extends PureComponent {
         return (
             <Col md={6} lg={4} className={'product-wrap'}>
                 <Card>
-                    <Link to="/products/1">
+                    <Link to={`/products/${_id}`}>
                         <CardImg top width="100%" src="https://tiendaenlinea.bavaria.co/media/catalog/product/cache/image/700x560/e9c3970ab036de70892d86c6d221abfe/r/b/rb_330_malta_leona_1.png" alt="Card image cap" />
                     </Link>
                     <CardBody>
@@ -51,7 +51,7 @@ class Product extends PureComponent {
                                 increase={this._increase}
                             />
                         </div>
-                        <Button color={'danger'} size={'sm'} block onClick={() => this._addProduct(_id)}>Add</Button>
+                        <Button color={'danger'} size={'sm'} block onClick={() => this._addProduct(this.props.product)}>Add</Button>
                     </CardBody>
                 </Card>
             </Col>

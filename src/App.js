@@ -7,6 +7,7 @@ import { Container } from 'reactstrap';
 import ShoppingCart from './views/ShoppingCart';
 import MyOrders from './views/MyOrders';
 import './App.scss';
+import { Alert } from 'reactstrap'
 
 class App extends PureComponent {
 	render() {

@@ -29,7 +29,7 @@ class Home extends PureComponent {
         const { categories, products } = this.props;
         return (
             <React.Fragment>
-                <Header />
+                <Header filter/>
                 <Row className={'content'}>
                     <Col md={3}>
                         <Filter categories={categories} handleFilter={this._filterByCategory}/>
