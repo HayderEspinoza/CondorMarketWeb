@@ -8,7 +8,7 @@ const Checkbox = ({value, name, checked, onChange}) => {
                     type="checkbox"
                     className="invisible"
                     value={value}
-                    checked={checked}
+                    checked={!!checked}
                     onChange={onChange} 
                 />
                 <div className="checkbox">

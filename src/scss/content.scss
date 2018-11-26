@@ -21,6 +21,15 @@
             font-size: 13px;
             font-weight: bold;
         }
+        .product-category {
+            background: #2b904b;
+            padding: 3px 3px;
+            color: white;
+            display: inline-block;
+            font-size: 13px !important;
+            padding: 0 5px;
+            border-radius: 5px;
+        }
     }
 }
 .wrap-products-list{
@@ -52,5 +61,23 @@
         height: 2px;
         background: $red;
         bottom: -5px;
+    }
+}
+// Product search
+.product-search {
+    svg {
+        position: absolute;
+        top: 5px;
+    }
+    input{
+        border: 0;
+        border-bottom: 1px solid #b7b7b7;
+        width: 100%;
+        text-decoration: none;
+        padding-bottom: 5px;
+        padding-left: 30px;
+        &:focus {
+            outline: none !important;
+        }
     }
 }

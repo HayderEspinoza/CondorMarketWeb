@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import { Row, Col, Button } from 'reactstrap';
-import { TiMinus } from 'react-icons/ti';
 import { TiPlus } from 'react-icons/ti';
 import QuantityControl from './../../components/QuantityControl';
 
 class ProductDetail extends PureComponent {
+
     render() {
         return (
             <React.Fragment>
@@ -38,9 +37,5 @@ class ProductDetail extends PureComponent {
         );
     }
 }
-
-ProductDetail.propTypes = {
-
-};
 
 export default ProductDetail;

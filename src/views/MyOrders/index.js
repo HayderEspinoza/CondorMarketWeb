@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import Header from './../../components/Header';
 import { Row, Col, FormGroup, Label, Input, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -54,9 +53,5 @@ class MyOrders extends PureComponent {
         );
     }
 }
-
-MyOrders.propTypes = {
-
-};
 
 export default MyOrders;

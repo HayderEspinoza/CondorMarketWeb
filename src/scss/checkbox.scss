@@ -9,10 +9,10 @@ body {
   margin-bottom: 0;
 }
 .label-cbx input:checked + .checkbox {
-  border-color: $checkboxColor;
+  border-color: $checkbox-success;
 }
 .label-cbx input:checked + .checkbox svg path {
-  fill: $checkboxColor;
+  fill: $checkbox-success;
 }
 .label-cbx input:checked + .checkbox svg polyline {
   stroke-dashoffset: 0;
@@ -37,7 +37,7 @@ body {
 }
 .label-cbx .checkbox svg path {
   fill: none;
-  stroke: $checkboxColor;
+  stroke: $checkbox-success;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;

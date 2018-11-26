@@ -4,7 +4,9 @@ import { Row, Col } from 'reactstrap';
 import Checkbox from '../../components/Checkbox';
 
 class Filter extends PureComponent {
+    
     render() {
+        const { categories, handleFilter } = this.props;
         return (
             <Row>
                 <Col>
@@ -12,9 +14,15 @@ class Filter extends PureComponent {
                         <Col>
                             <h5>Categories</h5>
                             <div className={'filter-content'}>
-                                <Checkbox name={'Bebidas'} />
-                                <Checkbox name={'Bebidas'} />
-                                <Checkbox name={'Bebidas'} />
+                                {
+                                    categories.map(category => {
+                                        return  <Checkbox 
+                                                    {...category}
+                                                    key={category._id} 
+                                                    onChange={() => handleFilter(category)}
+                                                />
+                                    })
+                                }
                             </div>
                         </Col>
                     </Row>
@@ -25,7 +33,7 @@ class Filter extends PureComponent {
 }
 
 Filter.propTypes = {
-
+    categories: PropTypes.array,
 };
 
 export default Filter;

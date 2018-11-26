@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import { Col, Row, Button } from 'reactstrap';
 import ControlQuantity from '../../components/QuantityControl';
@@ -54,10 +53,12 @@ class ShoppingCart extends PureComponent {
                     <Col md={3}>
                         <h4>ORDER SUMMARY</h4>
                         <table width={'100%'} className={'order-summary'}>
-                            <tr>
-                                <td>Total</td>
-                                <td className={'text-right'}>$456.342</td>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <td>Total</td>
+                                    <td className={'text-right'}>$456.342</td>
+                                </tr>
+                            </thead>
                         </table>
                         <Button color={'danger'} block>Continue</Button>
                     </Col>
@@ -66,9 +67,5 @@ class ShoppingCart extends PureComponent {
         );
     }
 }
-
-ShoppingCart.propTypes = {
-
-};
 
 export default ShoppingCart;

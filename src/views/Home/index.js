@@ -1,21 +1,41 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import Header from './../../components/Header';
-import { Container, Col, Row } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import Filter from './Filter';
-import ListProducts from './ListProducts';
+import ProductList from './ProductList';
+import { connect } from "react-redux";
+import { getCategories } from './../../actions/categories';
+import { getProducts, setCategoryFilter } from './../../actions/products';
 
 class Home extends PureComponent {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            category: null
+        }
+    }
+
+    _filterByCategory = (data) => {
+        this.props.setCategoryFilter(data)
+    }
+
+    componentDidMount() {
+        this.props.getCategories()
+        this.props.getProducts()
+    }
+
     render() {
+        const { categories, products } = this.props;
         return (
             <React.Fragment>
                 <Header />
                 <Row className={'content'}>
                     <Col md={3}>
-                        <Filter />
+                        <Filter categories={categories} handleFilter={this._filterByCategory}/>
                     </Col>
                     <Col md={9}>
-                        <ListProducts />
+                        <ProductList products={products}/>
                     </Col>
                 </Row>
             </React.Fragment>
@@ -23,8 +43,19 @@ class Home extends PureComponent {
     }
 }
 
-Home.propTypes = {
+const mapStateToProps = (state, ownProps) => {
+    return {
+        categories: state.CategoryReducer.categories,
+        products: state.ProductReducer.products
+    }
+}
 
-};
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        getCategories: () => dispatch(getCategories),
+        getProducts: () => dispatch(getProducts),
+        setCategoryFilter: (category) => dispatch(setCategoryFilter(category)),
+    }
+}
 
-export default Home;
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
