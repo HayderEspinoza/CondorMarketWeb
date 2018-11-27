@@ -1,18 +1,30 @@
 import React, { PureComponent } from 'react';
 import Header from '../../components/Header';
-import { Col, Row, Button } from 'reactstrap';
-import ControlQuantity from '../../components/QuantityControl';
-import { MdCancel } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Col, Row, Button, Modal, ModalHeader, ModalFooter, ModalBody, Alert } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getShoppingCart, addProduct, removeProduct } from '../../actions/products';
 import RowOrder from './RowOrder';
 import { moneyFormat } from '../../config/helpers';
+import { sendOrder } from './../../actions/orders';
 
 class ShoppingCart extends PureComponent {
 
+
+    state = {
+        showMessage: false
+    }
+    
+    componentWillReceiveProps(nextProps) {
+        if (this.props.order_created != nextProps.order_created){
+            this.setState({ showMessage: true })
+        }
+    }
+    
+    
+
     render() {
-        const { shopping_cart, addProduct, removeProduct, total } = this.props
+        const { shopping_cart, addProduct, removeProduct, total, sendOrder } = this.props
+        const { showMessage } = this.state
         return (
             <React.Fragment>
                 <Header/>
@@ -53,7 +65,19 @@ class ShoppingCart extends PureComponent {
                                 </tr>
                             </thead>
                         </table>
-                        <Button color={'danger'} block>Continue</Button>
+                        <Button 
+                            color={'danger'} 
+                            block 
+                            onClick={sendOrder} 
+                            disabled={!shopping_cart.length}
+                        >
+                            Continue
+                        </Button>
+                        {showMessage &&
+                            <Alert color="success" className={'mt-3'}>
+                                Order created
+                            </Alert>
+                        }
                     </Col>
                 </Row>
             </React.Fragment>
@@ -70,7 +94,8 @@ const mapStateToProps = (state, ownProps) => {
         });
     return {
         shopping_cart: state.ProductReducer.shopping_cart,
-        total: total
+        total: total,
+        order_created: state.OrderReducer.order_created,
     }
 }
 
@@ -79,6 +104,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         getShoppingCart: () => dispatch(getShoppingCart),
         addProduct: (product) => dispatch(addProduct(product)),
         removeProduct: (product) => dispatch(removeProduct(product)),
+        sendOrder: () => dispatch(sendOrder)
     }
 }
 

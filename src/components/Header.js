@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import { Row, Col } from 'reactstrap';
-import { IoMdCart } from "react-icons/io";
+import { IoMdCart, IoIosLogOut } from "react-icons/io";
 import { TiUser } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
 import { connect } from 'react-redux';
 import { searchProduct, getShoppingCart } from '../actions/products';
+import { removeSession } from '../actions/users';
 
 class Header extends PureComponent {
 
@@ -15,7 +16,7 @@ class Header extends PureComponent {
     
 
     render() {
-        const { searchProduct, shopping_cart, user, filter } = this.props
+        const { searchProduct, shopping_cart, session, filter, removeSession } = this.props
         return (
             <Row className={'header'}>
                 <Col className={'brand'}>
@@ -38,10 +39,15 @@ class Header extends PureComponent {
                         <IoMdCart size={30} color={'#000'}/>
                     </Link>
                     {
-                        user &&
-                        <Link to={'/my-orders'}>
-                            <TiUser size={30} color={'#000'} />
-                        </Link>
+                        session &&
+                        <React.Fragment>
+                            <a>
+                                <IoIosLogOut size={30} color={'#000'} onClick={removeSession}/>
+                            </a>
+                            <Link to={'/my-orders'}>
+                                <TiUser size={30} color={'#000'} />
+                            </Link>
+                        </React.Fragment>
                     }
                 </Col>
             </Row>
@@ -52,6 +58,7 @@ class Header extends PureComponent {
 const mapStateToProps = (state, ownProps) => {
     return {
         shopping_cart: state.ProductReducer.shopping_cart,
+        session: state.UserReducer.session
     }
 }
 
@@ -59,6 +66,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         searchProduct: (event) => dispatch(searchProduct(event.target.value)),
         getShoppingCart: () => dispatch(getShoppingCart),
+        removeSession: () => dispatch(removeSession)
     }
 }
 

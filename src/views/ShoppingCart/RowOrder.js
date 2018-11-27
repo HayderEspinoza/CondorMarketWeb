@@ -6,10 +6,6 @@ import { moneyFormat } from './../../config/helpers';
 
 class RowOrder extends PureComponent {
 
-    constructor(props) {
-        super(props)
-    }
-
     _increase = () => {
         const { addProduct, data } = this.props
         addProduct({ product: data._id, data, quantity: 1 })

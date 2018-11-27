@@ -11,8 +11,9 @@ const HttpProvider = axios.create({
 
 HttpProvider.interceptors.request.use(async (config) => {
     // Do something before request is sent
-    // const session = await getToken();
-    // if (session) config.headers['Authorization'] = `Bearer ${session.access_token}`;
+    let session = window.localStorage.getItem('session');
+    session = session ? JSON.parse(session) : ''
+    config.headers['Authorization'] = `Bearer ${session.token}`;
     return config;
 }, function (error) {
     // Do something with request error
