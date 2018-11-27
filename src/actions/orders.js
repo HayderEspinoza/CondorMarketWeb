@@ -11,3 +11,12 @@ export const successOrder = {
 export const errorOrder = {
     type: actionTypes.ERROR_ORDER,
 }
+
+export const getOrders = {
+    type: actionTypes.GET_ORDERS
+}
+
+export const setOrders = orders => ({
+    type: actionTypes.SET_ORDERS,
+    orders
+})

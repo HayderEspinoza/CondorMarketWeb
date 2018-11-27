@@ -4,16 +4,31 @@ import { Row, Col, FormGroup, Label, Input, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { getShoppingCart } from '../../actions/products';
 import { connect } from 'react-redux';
+import { getOrders } from '../../actions/orders';
+import { moneyFormat } from './../../config/helpers';
+import { Redirect } from "react-router-dom";
 
 class MyOrders extends PureComponent {
 
+    state = {
+        products : []
+    }
+
     componentDidMount() {
-        this.props.getShoppingCart()
+        this.props.getOrders()
+    }
+
+    _showProducts = (order) => {
+        let orderSelected = this.props.orders.find(item => item._id === order)        
+        this.setState({ products: orderSelected ? orderSelected.products : [] })
     }
     
-
     render() {
-        const { shopping_cart } = this.props
+        const { orders, session } = this.props
+        const { products } = this.state
+        if(!session)
+            return <Redirect to={{ pathname: "/" }} />
+        
         return (
             <React.Fragment>
                 <Header />
@@ -21,13 +36,14 @@ class MyOrders extends PureComponent {
                     <Col sm={4}>
                         <h4>MY ORDERS</h4>
                         <FormGroup>
-                            <Label for="exampleSelect">Order</Label>
-                            <Input type="select" name="select" id="exampleSelect">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                            <Label for="order">Order</Label>
+                            <Input type="select" name="select" id="exampleSelect" onChange={(event) => this._showProducts(event.target.value)}>
+                                <option value={''}>Select order</option>
+                                {
+                                    orders.map(order => {
+                                        return <option value={order._id} key={order._id}>{order.created_at}</option>
+                                    })
+                                }
                             </Input>
                         </FormGroup>
                     </Col>
@@ -46,16 +62,16 @@ class MyOrders extends PureComponent {
                             </thead>
                             <tbody>
                                 {
-                                    shopping_cart.map((product, index) => {
+                                    products.map((item, index) => {
                                         return (
-                                            <tr>
-                                                <th scope="row">{index}</th>
+                                            <tr key={index}>
+                                                <th scope="row">{index + 1}</th>
                                                 <td>
-                                                    <Link to={'products/1'}>{product.name}</Link>
+                                                    <Link to={`/products/${item.product._id}`}>{item.product.name}</Link>
                                                 </td>
-                                                <td>4</td>
-                                                <td>$10.000</td>
-                                                <td>$43.000</td>
+                                                <td>{item.quantity}</td>
+                                                <td>{moneyFormat(item.product.price, 0, '$')}</td>
+                                                <td>{moneyFormat((item.product.price * item.quantity), 0, '$')}</td>
                                             </tr>
                                         )
                                     })
@@ -71,13 +87,14 @@ class MyOrders extends PureComponent {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        shopping_cart: state.ProductReducer.shopping_cart
+        orders: state.OrderReducer.orders,
+        session: state.UserReducer.session,
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getShoppingCart: () => dispatch(getShoppingCart),
+        getOrders: () => dispatch(getOrders),
     }
 }
 

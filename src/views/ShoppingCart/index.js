@@ -69,7 +69,7 @@ class ShoppingCart extends PureComponent {
                             color={'danger'} 
                             block 
                             onClick={sendOrder} 
-                            disabled={!shopping_cart.length}
+                            disabled={!shopping_cart.length || total === 0}
                         >
                             Continue
                         </Button>

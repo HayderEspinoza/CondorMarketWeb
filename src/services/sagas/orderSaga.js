@@ -1,8 +1,8 @@
 import { takeLatest, call, put, select } from "redux-saga/effects";
 import { actionTypes } from '../../config/actionTypes';
-import { showLoginModal } from './../../actions/users';
+import { showLoginModal, setErrors } from './../../actions/users';
 import OrderProvider from './../providers/OrderProvider';
-import { errorOrder, successOrder } from './../../actions/orders';
+import { errorOrder, successOrder, setOrders } from './../../actions/orders';
 import { getShoppingCart } from "../../actions/products";
 
 function* sendOrderGenerator(action) {
@@ -25,6 +25,16 @@ function* sendOrderGenerator(action) {
     }
 }
 
+function* getOrderGenerator(action) {
+    try {
+        const orders = yield call(OrderProvider.getOrder)
+        yield put(setOrders(orders.data))
+    } catch (error) {
+        yield put(setErrors(error))
+    }
+}
+
 export function* orderSaga() {
     yield takeLatest(actionTypes.SEND_ORDER, sendOrderGenerator)
+    yield takeLatest(actionTypes.GET_ORDERS, getOrderGenerator)
 }
