@@ -59,7 +59,7 @@ class Categories extends PureComponent {
                                                     <td>{category.name}</td>
                                                     <td>{category.description}</td>
                                                     <td>
-                                                        <Badge color="danger" onClick={() => removeCategory(category._id)}>Remove</Badge>{' '}
+                                                        {/* <Badge color="danger" onClick={() => removeCategory(category._id)}>Remove</Badge>{' '} */}
                                                         <Badge color="primary" onClick={() => setCategory(category)}>Edit</Badge>
                                                     </td>
                                                 </tr>
