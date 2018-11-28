@@ -2,24 +2,23 @@ import React, { PureComponent } from 'react';
 import { Row, Col, Table, Badge } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getCategories } from './../../../actions/categories';
-import { getProducts } from './../../../actions/products';
+import { getProducts, createProduct, deleteProduct } from './../../../actions/products';
 import ProductForm from '../../../forms/ProductForm';
 
 class Products extends PureComponent {
 
     componentDidMount() {
-        // this.props.getCategories()
-        // this.props.getProducts()
+        this.props.getCategories()
+        this.props.getProducts()
     }
 
     _submit = (data) => {
-        console.log('data', data);
-        
+        this.props.createProduct(data)
     }
     
 
     render() {
-        const { products, categories } = this.props
+        const { products, categories, deleteProduct } = this.props
         return (
             <Row>
                 <Col className={'mt-5'} xs={12}>
@@ -30,12 +29,10 @@ class Products extends PureComponent {
                     </Row>
                     <Row>
                         <Col xs={12}>
-                            {/* <ProductForm 
+                            <ProductForm 
                                 categories={categories}
-                                submitForm
-                                product
-                                cancel
-                            /> */}
+                                submitForm={this._submit}
+                            />
                         </Col>
                     </Row>
                     <Row>
@@ -60,8 +57,7 @@ class Products extends PureComponent {
                                                     <td>{product.category.name}</td>
                                                     <td>{product.price}</td>
                                                     <td>
-                                                        {/* <Badge color="danger" onClick={() => removeCategory(category._id)}>Remove</Badge>{' '} */}
-                                                        {/* <Badge color="primary" onClick={() => setCategory(category)}>Edit</Badge> */}
+                                                        <Badge color="danger" onClick={() => deleteProduct(product._id)}>Remove</Badge>{' '}
                                                     </td>
                                                 </tr>
                                             )
@@ -88,6 +84,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         getCategories: () => dispatch(getCategories),
         getProducts: () => dispatch(getProducts),
+        createProduct: (data) => dispatch(createProduct(data)),
+        deleteProduct: (id) => dispatch(deleteProduct(id)),
     }
 }
 

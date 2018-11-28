@@ -15,7 +15,7 @@ import Admin from './views/Admin/index';
 class App extends PureComponent {
 
 	componentDidMount() {
-		// this.props.getSession()
+		this.props.getSession()
 	}
 	
 	_login = (data) => {
@@ -37,11 +37,11 @@ class App extends PureComponent {
 					</Switch>
 				</Router>
 				<Row>
-					{/* <LoginForm 
+					<LoginForm 
 						isOpen={loginModal} 
 						cancel={hideLoginModal} 
 						submitLogin={this._login}
-					/> */}
+					/>
 				</Row>
 			</Container>
 		);
@@ -62,5 +62,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	}
 }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(App)
-export default App
+export default connect(mapStateToProps, mapDispatchToProps)(App)

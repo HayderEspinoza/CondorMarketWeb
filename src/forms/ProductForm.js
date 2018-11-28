@@ -25,7 +25,7 @@ const validate = (values) => {
 }
 
 // create a component
-const ProductForm = ({ submitForm, handleSubmit, product, cancel, categories }) => {
+const ProductForm = ({ submitForm, handleSubmit, categories }) => {
     return (
         <Row>
             <Col md={3}>
@@ -42,7 +42,6 @@ const ProductForm = ({ submitForm, handleSubmit, product, cancel, categories }) 
             </Col>
             <Col md={12}>
                 <Button color="primary" onClick={handleSubmit(submitForm)}>Submit</Button>{' '}
-                {/* {category && <Button color="default" onClick={() => cancel(null)}>Cancel</Button>} */}
             </Col>
         </Row>
     )

@@ -52,3 +52,13 @@ export const removeProduct = (data) => ({
     type: actionTypes.REMOVE_PRODUCT,
     data
 })
+
+export const createProduct = (data) => ({
+    type: actionTypes.CREATE_PRODUCT,
+    data
+})
+
+export const deleteProduct = (id) => ({
+    type: actionTypes.DELETE_PRODUCT,
+    id
+})

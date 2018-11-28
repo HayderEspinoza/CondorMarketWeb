@@ -3,12 +3,12 @@ import { Row, Col, Table, Badge } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getCategories, removeCategory, addCategory, setCategory, updateCategory } from '../../../actions/categories';
 import CategoryForm from '../../../forms/CategoryForm';
-import { initialize } from 'redux-form';
+import { initialize, reset } from 'redux-form';
 
 class Categories extends PureComponent {
 
     componentDidMount() {
-        // this.props.getCategories()
+        this.props.getCategories()
     }
 
     _submit = (data) => {
@@ -32,11 +32,11 @@ class Categories extends PureComponent {
                     </Row>
                     <Row>
                         <Col xs={12}>
-                            {/* <CategoryForm 
+                            <CategoryForm 
                                 submitForm={this._submit} 
                                 category={category}
                                 cancel={setCategory}
-                            /> */}
+                            />
                         </Col>
                     </Row>
                     <Row>
@@ -88,7 +88,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         removeCategory: (category) => dispatch(removeCategory(category)),
         addCategory: (data) => dispatch(addCategory(data)),
         setCategory: (category) => {
-            // dispatch(initialize('CategoryForm', category))
+            dispatch(reset('CategoryForm', category))
             dispatch(setCategory(category))
         },
         updateCategory: (data) => dispatch(updateCategory(data)),

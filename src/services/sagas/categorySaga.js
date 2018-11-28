@@ -10,7 +10,7 @@ import { getErrorsFormat } from "../../config/helpers";
 function* getCategoriesGenerator(action) {
     try {
         const categories = yield call(CategoryProvider.getCategories)
-        yield put(initialize('CategoryForm', null))
+        yield put(reset('CategoryForm', null))
         yield put(setCategories(categories.data))
     } catch (error) {
         console.log('error', error);
