@@ -21,8 +21,8 @@ class Home extends PureComponent {
     }
 
     componentDidMount() {
-        this.props.getCategories()
-        this.props.getProducts()
+        // this.props.getCategories()
+        // this.props.getProducts()
     }
 
     render() {

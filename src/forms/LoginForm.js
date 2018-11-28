@@ -1,4 +1,4 @@
-//import liraries
+//import libraries
 import React from 'react';
 import { Field, reduxForm } from "redux-form";
 import { REGEX } from '../config/constants';
@@ -27,7 +27,7 @@ const LoginForm = ({ submitLogin, handleSubmit, isOpen, cancel }) => {
             <ModalHeader>Sign in</ModalHeader>
             <ModalBody>
                 <Form>
-                    <Field name={'email'} component={InputForm} label={'Email'} type={'email'} />
+                    <Field name={'email'} component={InputForm} label={'Email'} type={'email'}/>
                     <Field name={'password'} component={InputForm} label={'Password'} type={'password'}/>
                 </Form>
             </ModalBody>

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Row, Col } from 'reactstrap';
 import { IoMdCart } from "react-icons/io";
-import { GoSignOut, GoSignIn } from "react-icons/go";
+import { GoSignOut, GoSignIn, GoDatabase } from "react-icons/go";
 import { TiUser } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
@@ -45,6 +45,9 @@ class Header extends PureComponent {
                             <GoSignOut size={25} color={'#000'} onClick={removeSession} />
                             <Link to={'/my-orders'}>
                                 <TiUser size={30} color={'#000'} />
+                            </Link>
+                            <Link to={'/admin/products'}>
+                                <GoDatabase size={25} />
                             </Link>
                         </React.Fragment> :
                         <GoSignIn size={26} onClick={showLoginModal}/>

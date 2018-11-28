@@ -1,8 +1,8 @@
-import { takeLatest, call, put, select } from "redux-saga/effects";
+import { takeLatest, call, put } from "redux-saga/effects";
 import { actionTypes } from '../../config/actionTypes';
 import UserProvider from './../providers/UserProvider';
 import { setSession, setErrors, hideLoginModal } from "../../actions/users";
-import { startSubmit, stopSubmit } from 'redux-form'
+import { stopSubmit } from 'redux-form'
 import { getErrorsFormat } from "../../config/helpers";
 
 function* loginGenerator(action) {
@@ -12,9 +12,8 @@ function* loginGenerator(action) {
         yield put(setSession(session))
         yield put(hideLoginModal)
     } catch (error) {
-        // yield put(setErrors(error))
         if (error.response.status === 409){
-            const errors = yield call(getErrorsFormat, error.response.data.errors)
+            let errors = yield call(getErrorsFormat, error.response.data.errors)
             yield put(stopSubmit('LoginForm', errors))
         }
     }

@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import Header from './../../components/Header';
 import { Row, Col, FormGroup, Label, Input, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { getShoppingCart } from '../../actions/products';
 import { connect } from 'react-redux';
 import { getOrders } from '../../actions/orders';
 import { moneyFormat } from './../../config/helpers';

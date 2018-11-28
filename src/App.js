@@ -10,12 +10,12 @@ import { connect } from 'react-redux';
 import './App.scss';
 import LoginForm from './forms/LoginForm';
 import { hideLoginModal, login, getSession } from './actions/users';
+import Admin from './views/Admin/index';
 
 class App extends PureComponent {
 
-	
 	componentDidMount() {
-		this.props.getSession()
+		// this.props.getSession()
 	}
 	
 	_login = (data) => {
@@ -32,15 +32,16 @@ class App extends PureComponent {
 						<Route exact path="/products/:id" component={ProductDetail} />
 						<Route exact path="/shopping-cart" component={ShoppingCart} />
 						<Route exact path="/my-orders" component={MyOrders} />
+						<Route path="/admin" component={Admin} />
 						<Route component={NoMatch} />
 					</Switch>
 				</Router>
 				<Row>
-					<LoginForm 
+					{/* <LoginForm 
 						isOpen={loginModal} 
 						cancel={hideLoginModal} 
 						submitLogin={this._login}
-					/>
+					/> */}
 				</Row>
 			</Container>
 		);
@@ -61,4 +62,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+// export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App

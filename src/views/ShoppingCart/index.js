@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import Header from '../../components/Header';
-import { Col, Row, Button, Modal, ModalHeader, ModalFooter, ModalBody, Alert } from 'reactstrap';
+import { Col, Row, Button, Alert } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getShoppingCart, addProduct, removeProduct } from '../../actions/products';
 import RowOrder from './RowOrder';
@@ -15,7 +15,7 @@ class ShoppingCart extends PureComponent {
     }
     
     componentWillReceiveProps(nextProps) {
-        if (this.props.order_created != nextProps.order_created){
+        if (this.props.order_created !== nextProps.order_created){
             this.setState({ showMessage: true })
         }
     }

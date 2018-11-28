@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Col, Card, CardImg, CardBody, CardSubtitle, Button } from 'reactstrap';
+import { Col, Card, CardBody, CardSubtitle, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import QuantityControl from './QuantityControl';
 import { moneyFormat } from '../config/helpers';
@@ -30,13 +30,13 @@ class Product extends PureComponent {
     }
 
     render(){
-        const { product: { name, price, category, _id } } = this.props
+        const { product: { name, price, category, _id, fullImage } } = this.props
         const { quantity } = this.state
         return (
             <Col md={6} lg={4} className={'product-wrap'}>
                 <Card>
                     <Link to={`/products/${_id}`}>
-                        <CardImg top width="100%" src="https://tiendaenlinea.bavaria.co/media/catalog/product/cache/image/700x560/e9c3970ab036de70892d86c6d221abfe/r/b/rb_330_malta_leona_1.png" alt="Card image cap" />
+                        <div style={{ backgroundImage: `url('${fullImage}')`}} className={'center-image'}>&nbsp;</div>
                     </Link>
                     <CardBody>
                         <CardSubtitle className={'text-center'}>{name}</CardSubtitle>
