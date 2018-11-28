@@ -2,26 +2,31 @@
 import React from 'react';
 import { FormGroup, Label, Input, FormFeedback } from 'reactstrap';
 
+const adaptFileEventToValue = (handler) => ({ target: { files } }) => {
+    console.log('files', files);
+    handler(files.length ? { file: files[0], name: files[0].name } : null);
+}
+
 // create a component
-const InputForm = (props) => {
-    const { error, touched } = props.meta || false;
-    const is_error = error && touched;
-    const is_success = !error && touched;
+const InputForm = ({
+    meta: { error, touched },
+    input: { value, onChange, onBlur, name },
+    ph, type, label
+}) => {    
     return (
         <React.Fragment>
             <FormGroup>
-                <Label for={props.input.name}>{props.label}</Label>
+                {label && <Label for={name}>{label}</Label>}
                 <Input 
-                    invalid={is_error}
-                    valid={is_success}
-                    type={props.type} 
-                    name={props.input.name} 
-                    placeholder={props.label}
-                    onChange={props.input.onChange}
-                    onBlur={props.input.onBlur}
-                    value={props.input.value}
+                    invalid={error && touched}
+                    valid={!error && touched}
+                    type={type} 
+                    name={name} 
+                    placeholder={ph}
+                    onChange={type === 'file' ? adaptFileEventToValue(onChange) : onChange}
+                    onBlur={type === 'file' ? adaptFileEventToValue(onBlur) : onBlur}
                 />
-                <FormFeedback>{props.meta.error}</FormFeedback>
+                <FormFeedback>{error}</FormFeedback>
             </FormGroup>
         </React.Fragment>
     );

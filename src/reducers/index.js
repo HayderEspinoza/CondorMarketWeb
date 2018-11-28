@@ -8,9 +8,9 @@ import { OrderReducer } from './OrderReducer';
 const reducers = combineReducers({
     form,
     CategoryReducer,
-    ProductReducer,
     UserReducer,
     OrderReducer,
+    ProductReducer,
 });
 
 export default reducers;

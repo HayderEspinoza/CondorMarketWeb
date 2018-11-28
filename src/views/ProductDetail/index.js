@@ -37,6 +37,8 @@ class ProductDetail extends PureComponent {
     render() {
         const { quantity } = this.state
         const { product } = this.props
+        console.log('product', product);
+        
         return (
             <React.Fragment>
                 <Header />
@@ -44,10 +46,10 @@ class ProductDetail extends PureComponent {
                     product ?
                     <Row>
                         <Col sm={6}>
-                            <img src={'https://tiendaenlinea.bavaria.co/media/catalog/product/cache/image/700x560/e9c3970ab036de70892d86c6d221abfe/c/l/club_col_330cc_x_30_n_2.png'} alt={'Pepsi'} width={'100%'}/>
+                            <img src={product.fullImage} alt={product.name} width={'auto'} height={700} className={'product-image'}/>
                         </Col>
                         <Col sm={6}>
-                            <h2>{ product.name }</h2>
+                            <h2 className={'text-center'}>{ product.name }</h2>
                             <div className={'wrap-price-quantity'}>
                                 <h4>{ moneyFormat(product.price, 0, '$') }</h4>
                                 <QuantityControl
@@ -59,12 +61,9 @@ class ProductDetail extends PureComponent {
                                     Add <TiPlus />
                                 </Button>
                             </div>
-                            <Row className={'wrap-products-list'}>
-                                <Col sm={3} xs={3}>
-                                    <img src={'https://tiendaenlinea.bavaria.co/media/catalog/product/cache/image/700x560/e9c3970ab036de70892d86c6d221abfe/c/l/club_col_330cc_x_30_n_2.png'} alt={'Pepsi'} width={'100%'}/>
-                                </Col>
-                                <Col sm={3} xs={3}>
-                                    <img src={'https://tiendaenlinea.bavaria.co/media/catalog/product/cache/image/700x560/e9c3970ab036de70892d86c6d221abfe/c/l/club_col_330cc_x_30_n_2.png'} alt={'Pepsi'} width={'100%'} />
+                            <Row>
+                                <Col sm={3} xs={3} className={'product-image'}>
+                                    <img src={product.fullImage} alt={product.name} width={'100%'} />
                                 </Col>
                             </Row>
                         </Col>

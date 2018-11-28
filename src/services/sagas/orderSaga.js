@@ -12,7 +12,7 @@ function* sendOrderGenerator(action) {
             let products = window.localStorage.getItem('shopping_cart')
             products = products ? JSON.parse(products): []
             if(products.length){
-                const order = yield call(OrderProvider.sendOrder, { user: session.user, products })
+                yield call(OrderProvider.sendOrder, { user: session.user, products })
                 window.localStorage.removeItem('shopping_cart')
                 yield put(getShoppingCart)
                 yield put(successOrder)

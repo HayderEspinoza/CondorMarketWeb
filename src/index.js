@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
-import { store } from "./config/store";
+import { store } from './config/store';
 
 const rootComponent = (
     <Provider store={store}>

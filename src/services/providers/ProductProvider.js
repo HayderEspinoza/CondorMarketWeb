@@ -11,4 +11,12 @@ export default class ProductProvider {
     static getProduct(id) {
         return HttpProvider.get(`${baseUrl}/${id}`).then(response => response.data)
     }
+
+    static postProduct(data) {
+        return HttpProvider.post(baseUrl, data).then(response => response.data)
+    }
+
+    static deleteProduct(id) {
+        return HttpProvider.delete(`${baseUrl}/${id}`).then(response => response.data)
+    }
 }

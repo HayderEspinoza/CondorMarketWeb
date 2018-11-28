@@ -1,7 +1,8 @@
 import { takeLatest, call, put, select } from "redux-saga/effects";
 import { actionTypes } from '../../config/actionTypes';
 import ProductProvider from './../providers/ProductProvider';
-import { setProducts, getProducts, setFilter, setShoppingCart, setProduct } from "../../actions/products";
+import { setProducts, getProducts, setFilter, setShoppingCart, setProduct, getProduct } from "../../actions/products";
+import { initialize, reset } from 'redux-form';
 
 function* getProductsGenerator(action) {
     try {
@@ -80,6 +81,32 @@ function* getProductGenerator(action) {
     }
 }
 
+function* createProductGenerator(action) {
+    try {
+        const { data } = action
+        let form = new FormData()
+        form.append('image', data.image.file, data.image.name)
+        form.append('name', data.name)
+        form.append('category', data.category)
+        form.append('price', data.price)
+        yield call(ProductProvider.postProduct, form)
+        yield put(reset('ProductForm'))
+        yield put(getProducts)
+    } catch (error) {
+        console.log('error', error);
+    }
+}
+
+function* deleteProductGenerator(action) {
+    try {
+        const { id } = action
+        yield call(ProductProvider.deleteProduct, id)
+        yield put(getProducts)
+    } catch (error) {
+        console.log('error', error);
+    }
+}
+
 export function* productSaga() {
     yield takeLatest(actionTypes.GET_PRODUCTS, getProductsGenerator)
     yield takeLatest(actionTypes.ADD_PRODUCT, addProductGenerator)
@@ -87,4 +114,6 @@ export function* productSaga() {
     yield takeLatest(actionTypes.GET_SHOPPING_CART, getShoppingCartGenerator)
     yield takeLatest(actionTypes.GET_PRODUCT, getProductGenerator)
     yield takeLatest(actionTypes.REMOVE_PRODUCT, removeProductGenerator)
+    yield takeLatest(actionTypes.CREATE_PRODUCT, createProductGenerator)
+    yield takeLatest(actionTypes.DELETE_PRODUCT, deleteProductGenerator)
 }
